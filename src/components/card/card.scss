@@ -1,0 +1,53 @@
+.feed-card {
+  position: relative;
+  margin: 20px;
+  padding: 0px;
+  width: 20vw;
+  min-width: 250px;
+  overflow: hidden;
+  border-radius: 20px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.feed-card img {
+  width: 100%;
+}
+
+.feed-card .hide{
+  display: none;
+}
+
+.feed-card:hover .hide{ 
+  display: inline;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(21, 21, 21, 0.5);
+}
+
+.hide {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.hide h1{
+  position: relative;
+  top: 30%;
+  padding: auto;
+  color: white;
+}
+
+.hide .save-logo{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 20px;
+  height: auto;
+  filter: invert(100%);
+  cursor: pointer;
+}
