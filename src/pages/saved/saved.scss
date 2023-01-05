@@ -8,3 +8,8 @@
   align-items: center;
 } 
 
+.card-container div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}

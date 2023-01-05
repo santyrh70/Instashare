@@ -10,7 +10,6 @@ const Navbar = ({setSearchValue}) => {
 
 
   const location = useLocation();
-  console.log(location);
 
   return (
     <header className="navbar">

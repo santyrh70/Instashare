@@ -1,7 +1,7 @@
 import Navbar from '../../components/navbar/Navbar'
 import './saved.scss';
 import { texts } from "../../constants/texts";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Context from '../../utils/context';
 import Card from "../../components/card/Card";
 import { filterArray } from "../../utils/commonUtils";
@@ -11,6 +11,12 @@ const Saved = () => {
   const { savedImagesArray } = useContext(Context);
   const [imageArray, setImageArray] = useState(savedImagesArray);
 
+  useEffect(() => {
+    console.log('me disparé');
+    setImageArray(savedImagesArray);
+  
+  }, [savedImagesArray])
+  
   const withoutResMssg = <h4>{texts.WITHOUT_RESULTS}</h4>
 
   const renderImages = () => {
@@ -29,7 +35,7 @@ const Saved = () => {
     <div>
       <Navbar setSearchValue={handleSearchChange}/>
       <div className="card-container">
-        <h1>{savedImagesArray.length === 0? withoutResMssg : renderImages()}</h1>
+        <div>{savedImagesArray.length === 0 ? withoutResMssg : imageArray.length === 0 ? withoutResMssg : renderImages()}</div>
       </div>
     </div>
   );

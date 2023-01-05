@@ -5,10 +5,11 @@ import { texts } from "../../constants/texts";
 import { images } from "../../assets/json/feed.js";
 import { useState } from 'react';
 import { filterArray } from "../../utils/commonUtils";
+import { pexelsApi } from '../../constants/endpoints';
 
 const Home = () => {
   const [imageArray, setImageArray] = useState(images);
-  const withoutResMssg = <h1>{texts.WITHOUT_RESUTS}</h1>
+  const withoutResMssg = <h1>{texts.WITHOUT_RESULTS}</h1>
 
   const handleSearchChange = (e) => {
     if (e.key === "Enter") {
@@ -18,14 +19,25 @@ const Home = () => {
 
   const renderImages = () => {
     return imageArray.map(
-      (image) => <Card imgData={image}/>
+      (image) => <Card imgData={image} />
     );
+  }
+
+  const callService = async () => {
+    try {
+      const response = await fetch(`${pexelsApi}/search?query=nature&per_page=1`, { method: 'GET', headers: { Authorization: process.env.REACT_APP_PEXELS_API_KEY } });
+      const data = await response.json();
+      console.log(data.photos);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
     <div>
-      <Navbar setSearchValue={handleSearchChange}/>
-      <div className="card-container">{imageArray.length === 0? withoutResMssg : renderImages()}</div>
+      <Navbar setSearchValue={handleSearchChange} />
+      <button onClick={callService}>Fetch Service</button>
+      <div className="card-container">{imageArray.length === 0 ? withoutResMssg : renderImages()}</div>
     </div>
   );
 }

@@ -30,6 +30,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+  console.log(process.env.REACT_APP_PEXELS_API_KEY);
+  console.log(process.env.NODE_ENV);
   return (
     <div className="App">
       <ContextProvider>

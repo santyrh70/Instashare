@@ -1,0 +1,1 @@
+export const pexelsApi = "https://api.pexels.com/v1"
