@@ -6,7 +6,7 @@ export const ContextProvider = ({ children }) => {
 
   const [savedImagesArray, setSavedImagesArray] = useState([]);
 
-  const [auxIamges, setAuxIamges] = useState([]);
+  const [apiImages, setApiImages] = useState([]);
 
 
   const addImages = (image) => {
@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
   }
 
   return(
-    <Context.Provider value={{savedImagesArray, addImages, removeImages, findImageInSaved}}>
+    <Context.Provider value={{savedImagesArray, apiImages, setApiImages, addImages, removeImages, findImageInSaved}}>
       { children }
     </Context.Provider>
   )
