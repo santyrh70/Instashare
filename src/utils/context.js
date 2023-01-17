@@ -4,8 +4,9 @@ const Context = createContext();
 
 export const ContextProvider = ({ children }) => {
 
+  //user saved images array
   const [savedImagesArray, setSavedImagesArray] = useState([]);
-
+  //images array from api
   const [apiImages, setApiImages] = useState([]);
 
 
@@ -31,4 +32,4 @@ export const ContextProvider = ({ children }) => {
   )
 }
 
-export default Context;
+export default Context; 

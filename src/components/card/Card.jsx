@@ -11,7 +11,7 @@ const Card = ({ imgData }) => {
 
   return (
     <div className="feed-card">
-      <img src={imgData?.url}/>
+      <img src={imgData?.src.medium}/>
       <div className="hide">
         <img className='save-logo' src={imgSave ? savedLogo : saveLogo} onClick={imgSave ? () => removeImages(imgData.id) : () => addImages(imgData)}/>
       </div>
