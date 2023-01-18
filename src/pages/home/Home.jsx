@@ -33,7 +33,7 @@ const Home = () => {
   const getImagesDepOnSearchValue = async () => {
     try {
       if (searchValue !== '') {
-        const { data } = await pexelsApiAxios.get(`/search?query=${searchValue}&per_page=5`, {
+        const { data } = await pexelsApiAxios.get(`/search?query=${searchValue}&per_page=20`, {
           headers: {
             'Authorization': process.env.REACT_APP_PEXELS_API_KEY
           }
@@ -47,7 +47,7 @@ const Home = () => {
 
   const getCuratedImages = async () => {
     try {
-      const { data } = await pexelsApiAxios.get(`/curated?per_page=5`, {
+      const { data } = await pexelsApiAxios.get(`/curated?per_page=20`, {
         headers: {
           'Authorization': process.env.REACT_APP_PEXELS_API_KEY
         }
