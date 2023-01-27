@@ -16,13 +16,13 @@ export const ContextProvider = ({ children }) => {
 
   const removeImages = (imageId) => {
     setSavedImagesArray((prevState) => {
-      console.log(prevState.filter(({id}) => id !== imageId), prevState);
       return prevState.filter(({id}) => id !== imageId);
     })
   }
 
   const findImageInSaved = (image) => {
-    return savedImagesArray.includes(image);
+    const aux = savedImagesArray.find(img => img.id === image.id);
+    return typeof aux?.id !== 'undefined';
   }
 
   return(
