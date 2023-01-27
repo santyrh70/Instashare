@@ -5,6 +5,7 @@ import { useContext, useState, useEffect } from "react";
 import Context from '../../utils/context';
 import Card from "../../components/card/Card";
 import { filterArray } from "../../utils/commonUtils";
+import CardsContainer from '../../components/cardsContainer/CardsContainer';
 
 const Saved = () => {
 
@@ -12,7 +13,6 @@ const Saved = () => {
   const [imageArray, setImageArray] = useState(savedImagesArray);
 
   useEffect(() => {
-    console.log('me disparé');
     setImageArray(savedImagesArray);
   
   }, [savedImagesArray])
@@ -21,7 +21,7 @@ const Saved = () => {
 
   const renderImages = () => {
     return imageArray.map(
-      (image) => <Card imgData={image}/>
+      (image) => <Card imgData={image} key={image.id}/>
     );
   }
 
@@ -34,9 +34,9 @@ const Saved = () => {
   return (
     <div>
       <Navbar setSearchValue={handleSearchChange}/>
-      <div className="card-container">
-        <div>{savedImagesArray.length === 0 ? withoutResMssg : imageArray.length === 0 ? withoutResMssg : renderImages()}</div>
-      </div>
+      <CardsContainer>
+        {savedImagesArray.length === 0 ? withoutResMssg : imageArray.length === 0 ? withoutResMssg : renderImages()}
+      </CardsContainer>
     </div>
   );
 }

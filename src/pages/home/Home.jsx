@@ -5,8 +5,15 @@ import { texts } from "../../constants/texts";
 import { useState, useContext, useEffect } from 'react';
 import { pexelsApiAxios } from '../../constants/pexelsApi';
 import Context from "../../utils/context";
+import CardsContainer from '../../components/cardsContainer/CardsContainer';
+import { useSelector, useDispatch } from 'react-redux';
+import { addOneToCount, resetCount, substractOneToCount } from '../../actions/actions';
 
 const Home = () => {
+
+  const dispatch = useDispatch();
+  const countValue = useSelector(store => store.countData.count);
+  const currentAction = useSelector(store => store.countData.currentAction);
 
   const { apiImages, setApiImages } = useContext(Context);
   const [searchValue, setSearchValue] = useState('');
@@ -19,11 +26,7 @@ const Home = () => {
   useEffect(() => {
     getImagesDepOnSearchValue();
   }, [searchValue]);
-
-  useEffect(() => {
-    console.log(apiImages);
-  }, [apiImages])
-
+  
   const handleSearchChange = (e) => {
     if (e.key === "Enter") {
       setSearchValue(e.target.value);
@@ -46,6 +49,7 @@ const Home = () => {
   }
 
   const getCuratedImages = async () => {
+    console.log('curated');
     try {
       const { data } = await pexelsApiAxios.get(`/curated?per_page=20`, {
         headers: {
@@ -67,7 +71,12 @@ const Home = () => {
   return (
     <div>
       <Navbar setSearchValue={handleSearchChange} />
-      <div className="card-container">{renderImages()}</div>
+      <span>{countValue}</span>
+      <span>{currentAction}</span>
+      <button onClick={() => dispatch(addOneToCount())}>+</button>
+      <button onClick={() => dispatch(substractOneToCount())}>-</button>
+      <button onClick={() => dispatch(resetCount())}>reset</button>
+      <CardsContainer>{renderImages()}</CardsContainer>
     </div>
   );
 }
