@@ -1,20 +1,19 @@
 import Navbar from '../../components/navbar/Navbar'
 import './saved.scss';
 import { texts } from "../../constants/texts";
-import { useContext, useState, useEffect } from "react";
-import Context from '../../utils/context';
+import { useState, useEffect } from "react";
 import Card from "../../components/card/Card";
 import { filterArray } from "../../utils/commonUtils";
 import CardsContainer from '../../components/cardsContainer/CardsContainer';
+import { useSelector } from 'react-redux';
 
 const Saved = () => {
 
-  const { savedImagesArray } = useContext(Context);
+  const savedImagesArray = useSelector(store => store.savedImages.savedImagesArray);
   const [imageArray, setImageArray] = useState(savedImagesArray);
 
   useEffect(() => {
     setImageArray(savedImagesArray);
-  
   }, [savedImagesArray])
   
   const withoutResMssg = <h4>{texts.WITHOUT_RESULTS}</h4>

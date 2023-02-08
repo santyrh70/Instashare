@@ -4,3 +4,8 @@ export const filterArray = (arrayToFilter, filterValue) => {
   })
   return filteredArray;
 }
+
+export const findValueInArrayById = (valuesArray, value) => {
+  const aux = valuesArray.find(img => img.id === value.id);
+  return typeof aux?.id !== 'undefined';
+}

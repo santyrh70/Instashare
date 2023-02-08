@@ -2,68 +2,43 @@ import Navbar from '../../components/navbar/Navbar'
 import Card from "../../components/card/Card";
 import './home.scss';
 import { texts } from "../../constants/texts";
-import { useState, useContext, useEffect } from 'react';
-import { pexelsApiAxios } from '../../constants/pexelsApi';
-import Context from "../../utils/context";
+import { useEffect } from 'react';
 import CardsContainer from '../../components/cardsContainer/CardsContainer';
 import { useSelector, useDispatch } from 'react-redux';
-import { addOneToCount, resetCount, substractOneToCount } from '../../actions/actions';
+import { getCurratedPhotos, getPhotosBySearchValue, setSearchValue } from '../../actions/actions';
 
 const Home = () => {
 
   const dispatch = useDispatch();
-  const countValue = useSelector(store => store.countData.count);
-  const currentAction = useSelector(store => store.countData.currentAction);
+  const currentAction = useSelector(store => store.pexelsApi.currentAction);
+  const photos = useSelector(store => store.pexelsApi.photosPexels);
+  const error = useSelector(store => store.pexelsApi.error);
+  const loading = useSelector(store => store.pexelsApi.loading);
+  const searchValue = useSelector(store => store.pexelsApi.searchValue);
+  const currentPage = useSelector(store => store.pexelsApi.currentPage);
+  const nextPageUrl = useSelector(store => store.pexelsApi.nextUrl);
+  const prevPageUrl = useSelector(store => store.pexelsApi.prevUrl);
 
-  const { apiImages, setApiImages } = useContext(Context);
-  const [searchValue, setSearchValue] = useState('');
   const withoutResMssg = <h1>{texts.WITHOUT_RESULTS}</h1>
 
   useEffect(() => {
-    getCuratedImages();
+    dispatch(getCurratedPhotos());
   }, []);
 
   useEffect(() => {
-    getImagesDepOnSearchValue();
+    if (searchValue !== '') {
+      dispatch(getPhotosBySearchValue(searchValue));
+    }
   }, [searchValue]);
   
   const handleSearchChange = (e) => {
     if (e.key === "Enter") {
-      setSearchValue(e.target.value);
-    }
-  }
-
-  const getImagesDepOnSearchValue = async () => {
-    try {
-      if (searchValue !== '') {
-        const { data } = await pexelsApiAxios.get(`/search?query=${searchValue}&per_page=20`, {
-          headers: {
-            'Authorization': process.env.REACT_APP_PEXELS_API_KEY
-          }
-        });
-        setApiImages(data.photos);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  const getCuratedImages = async () => {
-    console.log('curated');
-    try {
-      const { data } = await pexelsApiAxios.get(`/curated?per_page=20`, {
-        headers: {
-          'Authorization': process.env.REACT_APP_PEXELS_API_KEY
-        }
-      });
-      setApiImages(data.photos);
-    } catch (e) {
-      console.log(e);
+      dispatch(setSearchValue(e.target.value));
     }
   }
 
   const renderImages = () => {
-    return apiImages.map(
+    return photos.length > 0 && photos.map(
       (image) => <Card imgData={image} key={image.id} />
     );
   }
@@ -71,12 +46,14 @@ const Home = () => {
   return (
     <div>
       <Navbar setSearchValue={handleSearchChange} />
-      <span>{countValue}</span>
-      <span>{currentAction}</span>
-      <button onClick={() => dispatch(addOneToCount())}>+</button>
-      <button onClick={() => dispatch(substractOneToCount())}>-</button>
-      <button onClick={() => dispatch(resetCount())}>reset</button>
-      <CardsContainer>{renderImages()}</CardsContainer>
+      <CardsContainer>{loading === false && renderImages()}</CardsContainer>
+      {loading === true && <div>Loading</div>}
+      {error !== undefined && <div>ERROR</div>}
+      <div>
+        <button onClick={() => dispatch(getCurratedPhotos(prevPageUrl))} disabled={!prevPageUrl} >Prev</button>
+        <span >Current Page {currentPage}</span>
+        <button onClick={() => dispatch(getCurratedPhotos(nextPageUrl))} disabled={!nextPageUrl} >Next</button>
+      </div>
     </div>
   );
 }
