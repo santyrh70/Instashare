@@ -1,35 +1,38 @@
 import Navbar from '../../components/navbar/Navbar'
 import Card from "../../components/card/Card";
+import Dropdown from "../../components/dropdown/Dropdown";
 import './home.scss';
 import { texts } from "../../constants/texts";
 import { useEffect } from 'react';
 import CardsContainer from '../../components/cardsContainer/CardsContainer';
+import Pagination from "../../components/pagination/Pagination";
+import Spinner from "../../components/spinner/Spinner";
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurratedPhotos, getPhotosBySearchValue, setSearchValue } from '../../actions/actions';
 
 const Home = () => {
 
   const dispatch = useDispatch();
-  const currentAction = useSelector(store => store.pexelsApi.currentAction);
   const photos = useSelector(store => store.pexelsApi.photosPexels);
   const error = useSelector(store => store.pexelsApi.error);
   const loading = useSelector(store => store.pexelsApi.loading);
   const searchValue = useSelector(store => store.pexelsApi.searchValue);
   const currentPage = useSelector(store => store.pexelsApi.currentPage);
-  const nextPageUrl = useSelector(store => store.pexelsApi.nextUrl);
-  const prevPageUrl = useSelector(store => store.pexelsApi.prevUrl);
+  const imagesPerPage = useSelector(store => store.pexelsApi.imagesPerPage);
 
   const withoutResMssg = <h1>{texts.WITHOUT_RESULTS}</h1>
 
   useEffect(() => {
-    dispatch(getCurratedPhotos());
-  }, []);
+    if (searchValue === '') {
+      dispatch(getCurratedPhotos('', imagesPerPage, currentPage));
+    }
+  }, [currentPage, imagesPerPage, searchValue]);
 
   useEffect(() => {
     if (searchValue !== '') {
-      dispatch(getPhotosBySearchValue(searchValue));
+      dispatch(getPhotosBySearchValue(searchValue, imagesPerPage));
     }
-  }, [searchValue]);
+  }, [searchValue, imagesPerPage]);
   
   const handleSearchChange = (e) => {
     if (e.key === "Enter") {
@@ -46,13 +49,12 @@ const Home = () => {
   return (
     <div>
       <Navbar setSearchValue={handleSearchChange} />
-      <CardsContainer>{loading === false && renderImages()}</CardsContainer>
-      {loading === true && <div>Loading</div>}
-      {error !== undefined && <div>ERROR</div>}
-      <div>
-        <button onClick={() => dispatch(getCurratedPhotos(prevPageUrl))} disabled={!prevPageUrl} >Prev</button>
-        <span >Current Page {currentPage}</span>
-        <button onClick={() => dispatch(getCurratedPhotos(nextPageUrl))} disabled={!nextPageUrl} >Next</button>
+      <div className='main'>
+        <Dropdown></Dropdown>
+        <CardsContainer hide={!!loading}>{loading === false && renderImages()}</CardsContainer>
+        {loading === true && <Spinner/>}
+        {error !== undefined && <div>ERROR</div>}
+        <Pagination></Pagination>
       </div>
     </div>
   );

@@ -1,11 +1,17 @@
 import { types } from '../actionsType';
-import axios from 'axios';
 import { pexelsApiAxios } from '../constants/pexelsApi';
 
 export const setSearchValue = (searchValue) => {
   return {
     type: types.SET_SEARCH_VALUE,
     searchValue: searchValue
+  }
+}
+
+export const setNumImagesPerPage = (numImagesPerPage) => {
+  return {
+    type: types.SET_NUM_IMAGES_PER_PAGE,
+    imagesPerPage: numImagesPerPage
   }
 }
 
@@ -30,12 +36,12 @@ export const setSavedImagesArray = (image) => {
   }
 }
 
-export const getPhotosBySearchValue = (searchValue) => (dispatch) => {
+export const getPhotosBySearchValue = (searchValue, numImagesPerPage, page) => (dispatch) => {
   dispatch({
     type: types.LOADING_PHOTOS
   })
 
-  pexelsApiAxios.get(`/search?query=${searchValue}&per_page=20`, {
+  pexelsApiAxios.get(`/search?query=${searchValue}&page=${!!page ? page : '1'}&per_page=${numImagesPerPage}`, {
     headers: {
       'Authorization': process.env.REACT_APP_PEXELS_API_KEY
     }
@@ -53,9 +59,9 @@ export const getPhotosBySearchValue = (searchValue) => (dispatch) => {
   })
 }
 
-export const getCurratedPhotos = (url) => (dispatch) => {
+export const getCurratedPhotos = (url, imagesPerPage, page) => (dispatch) => {
 
-  const urlToFetch = !!url ? url : '/curated?per_page=20'
+  const urlToFetch = !!url ? url : `/curated/?page=${page}&per_page=${imagesPerPage}`;
 
   dispatch({
     type: types.LOADING_PHOTOS

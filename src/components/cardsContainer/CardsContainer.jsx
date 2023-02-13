@@ -1,9 +1,9 @@
-import "./CardsContainer.css";
+import "./CardsContainer.scss";
 
-const CardsContainer = ({ children }) => {
+const CardsContainer = ({ children, hide }) => {
 
   return (
-    <div className="card-container">
+    <div className={`card-container ${hide ? 'hide' : ''}`}>
       <div className="cards">
         {children}
       </div>

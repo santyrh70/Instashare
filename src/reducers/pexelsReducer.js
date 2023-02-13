@@ -8,7 +8,9 @@ const initialState = {
   searchValue: '',
   nextUrl: '',
   prevUrl: '',
-  currentPage: ''
+  currentPage: '',
+  imagesPerPage: 20,
+  total_results: 0
 }
 
 const pexelsReducer = (state = initialState, action) => {
@@ -17,6 +19,11 @@ const pexelsReducer = (state = initialState, action) => {
       return {
         ...state,
         searchValue: action.searchValue
+      }
+    case types.SET_NUM_IMAGES_PER_PAGE:
+      return {
+        ...state,
+        imagesPerPage: action.imagesPerPage
       }
     case types.ERROR_PHOTOS:
       return {
@@ -36,7 +43,8 @@ const pexelsReducer = (state = initialState, action) => {
         loading: false,
         nextUrl: action.payload.data?.next_page?.split('https://api.pexels.com/v1')[1] || '',
         prevUrl: action.payload.data?.prev_page?.split('https://api.pexels.com/v1')[1] || '',
-        currentPage: action.payload.data?.page || ''
+        currentPage: action.payload.data?.page || '',
+        totalResults: action.payload.data?.total_results
       }
     default:
       return state

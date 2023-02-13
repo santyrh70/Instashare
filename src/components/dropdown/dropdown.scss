@@ -1,0 +1,53 @@
+.dropdown {
+  align-self: flex-end;
+  display: flex;
+  position: relative;
+  width: fit-content;
+  margin: 10px 40px 0;
+  padding: 4px;
+  background-color: rgb(255, 255, 255);
+  border: solid 0.5px rgb(0, 175, 219);
+  border-radius: 10px;
+
+  .dropdown__button{
+    width: fit-content;
+  }
+
+  .dropdown__content::-webkit-scrollbar{
+    display: none;
+  }
+
+  .dropdown__content{
+    display: none;
+    box-sizing: border-box;
+    border: solid 1px #d6d6d6;
+    font-size: 1.2rem;
+    box-shadow: 2px 6px 8px 0px rgb(151 151 151 / 32%);
+    position: absolute;
+    left: 158px;
+    width: fit-content;
+    height: 80px;
+    background-color: white;
+    overflow: scroll;
+    z-index: 1;
+    border-radius: 4px;
+
+    .dropdown__item{
+      border: solid 1px #ffffff;
+      margin: 2px;
+    }
+  }
+
+  .dropdown__actual-img-per-page {
+    margin: 0px 4px;
+    color: rgb(208, 61, 186);
+    font-size: 1.2rem;
+  }
+
+  .hide {
+    display: block;
+  }
+
+}
+
+
