@@ -3,6 +3,8 @@ import { links } from "./constants/links";
 import Home from '../src/pages/home/Home';
 import Explore from "../src/pages/explore/Explore";
 import Saved from "../src/pages/saved/Saved";
+import Register from "./pages/register/Register";
+import SignIn from "./pages/signIn/SignIn";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,6 +16,14 @@ import {
 import { ContextProvider } from "./utils/context";
 
 const router = createBrowserRouter([
+  {
+    path: links.LOGIN,
+    element: <SignIn/>
+  },
+  {
+    path: links.REGISTER,
+    element: <Register/>,
+  },
   {
     path: links.HOME,
     element: <Home/>,

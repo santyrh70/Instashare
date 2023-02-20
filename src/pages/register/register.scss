@@ -1,0 +1,58 @@
+.main-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .logo {
+    width: 64px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      width: 230px;
+      height: 32px;
+      border-radius: 8px;
+      border: solid 1px green;
+    }
+
+    input::placeholder {
+      padding-left: 16px;
+    } 
+
+    .email-input {  
+      
+    }
+
+    .password-input {
+    }
+
+    .re-password-input {
+    }
+
+    .register-error {
+      background-color: rgb(255, 178, 178);
+      margin-bottom: 16px;
+      border-radius: 8px;
+    }
+
+    .submit-button {
+      box-sizing: border-box;
+      margin-bottom: 16px;
+      width: 230px;
+      height: 32px;
+      border-radius: 8px;
+      border: solid 1px green;
+      color: rgb(12, 96, 12);
+      background-color: rgb(4, 194, 4);
+    }
+  }
+}

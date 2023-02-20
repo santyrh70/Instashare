@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 import pexelsReducer from "./reducers/pexelsReducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import savedImagesReducer from "./reducers/savedImagesReducer";
+import firebaseReducer from "./reducers/firebaseReducer";
 
 const reducer = combineReducers({
   pexelsApi: pexelsReducer,
-  savedImages: savedImagesReducer
+  savedImages: savedImagesReducer,
+  fireBase: firebaseReducer
 })
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 

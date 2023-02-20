@@ -1,5 +1,7 @@
 export const links = {
   HOME: "/",
   EXPLORE: "/explore",
-  SAVED: "/saved"
+  SAVED: "/saved",
+  REGISTER: "/register",
+  LOGIN: "/login"
 }

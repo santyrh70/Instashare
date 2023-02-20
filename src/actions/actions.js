@@ -1,5 +1,7 @@
 import { types } from '../actionsType';
 import { pexelsApiAxios } from '../constants/pexelsApi';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase_setup/firebase';
 
 export const setSearchValue = (searchValue) => {
   return {
@@ -34,6 +36,58 @@ export const setSavedImagesArray = (image) => {
     type: types.SAVE_IMAGE,
     payload: image
   }
+}
+
+export const logIn = (email, password) => (dispatch) => {
+  dispatch({
+    type: types.LOGGING_IN,
+    isLoggingIn: true
+  })
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      dispatch({
+        type: types.SIGNED_IN,
+        isLoggingIn: false,
+        currentUser: user,
+        userStatus: 'logged',
+      })
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage, errorCode)
+    });
+}
+
+export const registerNewUser = (email, password) => (dispatch) => {
+  dispatch({
+    type: types.REGISTERING_NEW_USER,
+    isRegistering: true
+  });
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in..
+      const user = userCredential.user;
+      dispatch({
+        type: types.NEW_USER_REGISTERED,
+        currentUser: user,
+        userStatus: 'logged',
+        isRegistering: false
+      });
+      console.log(user)
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.LOG_ERROR_REGISTER_NEW_USER,
+        errorCode: error.code,
+        errorMssg: error.message 
+      })
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage, errorCode)
+    });
 }
 
 export const getPhotosBySearchValue = (searchValue, numImagesPerPage, page) => (dispatch) => {
