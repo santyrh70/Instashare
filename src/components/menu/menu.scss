@@ -1,0 +1,33 @@
+.menu{
+  margin-left: auto;
+  margin-right: 6px;
+  .menu-img {
+    width: 32px;
+  }
+
+  .menu__content{
+    display: none;
+    box-sizing: border-box;
+    border: solid 1px #d6d6d6;
+    font-size: 1.2rem;
+    box-shadow: 2px 6px 8px 0px rgb(151 151 151 / 32%);
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: fit-content;
+    height: 125px;
+    background-color: white;
+    z-index: 1;
+    border-radius: 4px;
+    padding: 10px;
+    
+    .menu__item{
+      border: solid 1px #ffffff;
+      margin: 2px;
+      padding: 3px 50px
+    }
+  }
+  .menu__content--show {
+    display: inline;
+  }
+}

@@ -1,6 +1,6 @@
 import { types } from '../actionsType';
 import { pexelsApiAxios } from '../constants/pexelsApi';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../firebase_setup/firebase';
 
 export const setSearchValue = (searchValue) => {
@@ -59,6 +59,19 @@ export const logIn = (email, password) => (dispatch) => {
       const errorMessage = error.message;
       console.log(errorMessage, errorCode)
     });
+}
+
+export const logout = () => (dispatch) => {
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    dispatch({
+      type: types.LOGOUT,
+      currentUser: undefined,
+      userStatus: undefined
+    })
+  }).catch((error) => {
+    console.log(error)
+  });
 }
 
 export const registerNewUser = (email, password) => (dispatch) => {

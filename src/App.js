@@ -5,6 +5,7 @@ import Explore from "../src/pages/explore/Explore";
 import Saved from "../src/pages/saved/Saved";
 import Register from "./pages/register/Register";
 import SignIn from "./pages/signIn/SignIn";
+import ProtectedRoutes from './pages/ProtectedRoutes';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -34,9 +35,15 @@ const router = createBrowserRouter([
     element: <Explore/>,
   },
   {
-    path: links.SAVED,
-    element: <Saved/>
+    element: <ProtectedRoutes/>,
+    children: [
+      {
+        path: links.SAVED,
+        element: <Saved/>
+      }
+    ]
   }
+  
 ]);
 
 function App() {

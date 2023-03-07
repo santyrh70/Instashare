@@ -1,9 +1,9 @@
 import "./CardsContainer.scss";
 
-const CardsContainer = ({ children, hide }) => {
+const CardsContainer = ({ children}) => {
 
   return (
-    <div className={`card-container ${hide ? 'hide' : ''}`}>
+    <div className='card-container' data-testid='cardsContainer'>
       <div className="cards">
         {children}
       </div>

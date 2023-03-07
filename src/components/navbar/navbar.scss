@@ -4,69 +4,97 @@
   background-color: white;
   width: 100%;
   border-bottom: solid 0.5px rgb(176, 176, 176);
-}
 
-.navbar-list{
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  list-style-type: none;
-  height: 60px;
-}
+  .navbar-list{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 60px;
+    
+    .hide-menu{
+      display: none;
+    }
 
-.navbar-list .navbar-list-item{
-  padding: 0 1rem;
-}
+    @media (max-width: 780px) {
+      .hide-opt {
+        display: none;
+      }
+      .hide-menu {
+        display: inline;
+      }
+    }
 
-.navbar-list-item a {
-  text-decoration: none;
-  color: #000000;
-  font-size: 1rem;
-  font-weight: bold;
-}
+    .focus a{
+      color: rgb(208, 61, 186);
+    }
 
-.navbar-list-item.home a{
-  font-size: 1.5rem;
-}
+    a {
+      text-decoration: none;
+      color: #000000;
+      font-size: 1rem;
+      font-weight: bold;
+    }
 
-.navbar-list .navbar-list-item .logo {
-  height: auto;
-  width: 40px;
-}
+    .navbar-list-item{
+      padding: 0 1rem;
 
-.navbar-list .navbar-list-item input {
-  width: 30vw;
-  min-width: 300px;
-  padding-left: 20px;
-  height: 30px;
-  border-radius: 20px;
-  border-color: #e0e0e0;
-  border-style: none;
-  background-color: rgb(235, 235, 235);
-  background-image: url(/assets/images/lupa.png);
-  background-repeat: no-repeat;
-  background-position: left;
-}
+      .logo {
+        height: auto;
+        width: 40px;
+      }
 
-.navbar-list-item.placeholder img {
-  height: auto;
-  width: 10px;
-}
+      input {
+        width: 30vw;
+        min-width: 300px;
+        padding-left: 20px;
+        height: 30px;
+        border-radius: 20px;
+        border-color: #e0e0e0;
+        border-style: none;
+        background-color: rgb(235, 235, 235);
+        background-image: url(/assets/images/lupa.png);
+        background-repeat: no-repeat;
+        background-position: left;
+      }
 
-.navbar-list .navbar-list-item.user {
-  display: inline;
-  margin-left: auto;
-}
-.navbar-list .navbar-list-item .user-image {
-  height: auto;
-  width: 35px;
-}
+      .user-image {
+        height: auto;
+        width: 35px;
+      }
 
-.navbar-list .navbar-list-item img {
-  display: inline;
-}
+      img {
+        display: inline;
+      }
+    }
 
-.navbar-list .focus a{
-  color: rgb(208, 61, 186);
+    .navbar-list-item.home a{
+      font-size: 1.5rem;
+    }
+
+    .navbar-list-item.placeholder img {
+      height: auto;
+      width: 10px;
+    }
+
+    .navbar-list-item.user {
+    }
+
+    .navbar-list-item.logout {
+      margin-left: auto;
+      color: red;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .navbar-list-item.login {
+      margin-left: auto;
+      
+      a {
+        color: rgb(27, 224, 56);
+      }
+    }
+  }
 }

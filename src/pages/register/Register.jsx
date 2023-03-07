@@ -3,6 +3,9 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerNewUser } from '../../actions/actions';
 import Logo from '../../components/logo/Logo';
+import { links } from '../../constants/links';
+import { texts } from '../../constants/texts';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -12,7 +15,7 @@ const Register = () => {
   return (
     <div>
       <div className='main-register'>
-      <Logo className='logo'/>
+      <Link to={links.HOME}><Logo className='logo'/></Link>
       <Formik
        initialValues={{ email: '', password: '', rePassword: '' }}
        onSubmit={(values, { setSubmitting }) => {
@@ -30,7 +33,6 @@ const Register = () => {
          handleBlur,
          handleSubmit,
          isSubmitting,
-         /* and other goodies */
        }) => (
          <form className='register-form' onSubmit={handleSubmit}>
            <input
@@ -67,6 +69,7 @@ const Register = () => {
          </form>
        )}
      </Formik>
+     <span>I have an Account</span><Link to={links.LOGIN}>{texts.LOGIN}</Link>
       </div>
     </div>
   );

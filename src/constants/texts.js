@@ -3,5 +3,7 @@ export const texts = {
   HOME: "Inicio",
   EXPLORE: "Explorar",
   SAVED: "Guardados",
-  WITHOUT_RESULTS: "Sin resultados"
+  WITHOUT_RESULTS: "Sin resultados",
+  LOGIN: 'Login',
+  REGISTER: 'Register now'
 }

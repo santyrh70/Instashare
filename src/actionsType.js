@@ -13,5 +13,6 @@ export const types = {
   LOGGING_IN: 'LOGGING_IN',
   SIGNED_IN: 'SIGNED_IN',
   SET_USER_STATUS: 'USER_STATUS',
+  LOGOUT: 'LOGOUT',
 
 }

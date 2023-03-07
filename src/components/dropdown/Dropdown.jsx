@@ -10,10 +10,6 @@ const Dropdown = () => {
 
   const [showDropdown, setShowDropdown] = useState(false);
 
-  useEffect(() =>{
-    console.log(showDropdown);
-  }, [showDropdown])
-
   const setImgPerPage = (numPerPage) => {
     setShowDropdown(false);
     dispatch(setNumImagesPerPage(numPerPage));

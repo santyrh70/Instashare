@@ -50,11 +50,11 @@ const Home = () => {
     <div>
       <Navbar setSearchValue={handleSearchChange} />
       <div className='main'>
-        <Dropdown></Dropdown>
-        <CardsContainer hide={!!loading}>{loading === false && renderImages()}</CardsContainer>
-        {loading === true && <Spinner/>}
+        <Dropdown/>
+        {!loading && <CardsContainer >{renderImages()}</CardsContainer>}
+        {!!loading && <Spinner/>}
         {error !== undefined && <div>ERROR</div>}
-        <Pagination></Pagination>
+        <Pagination/>
       </div>
     </div>
   );

@@ -3,25 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../components/logo/Logo';
 import { logIn } from '../../actions/actions';
 import './signIn.scss'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { links } from '../../constants/links';
+import { texts } from '../../constants/texts';
 
 const SignIn = () => {
 
   const dispatch = useDispatch();
   const errorCode = useSelector(store => store.fireBase.errorCode);
   const errorMssg = useSelector(store => store.fireBase.errorMssg);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   
   return (
     <div>
       <div className='main-login'>
-      <Logo className='logo'/>
+      <Link to={links.HOME}><Logo className='logo'/></Link>
       <Formik
        initialValues={{ email: '', password: ''}}
        onSubmit={(values, { setSubmitting }) => {
          setTimeout(() => {
            dispatch(logIn(values.email, values.password))
            setSubmitting(false);
+           
          }, 400);
+         if (location.state?.from) {
+          navigate('/')
+         }else{
+          navigate('/');
+         }
        }}
       >
        {({
@@ -32,7 +44,6 @@ const SignIn = () => {
          handleBlur,
          handleSubmit,
          isSubmitting,
-         /* and other goodies */
        }) => (
          <form className='login-form' onSubmit={handleSubmit}>
            <input
@@ -60,6 +71,7 @@ const SignIn = () => {
          </form>
        )}
      </Formik>
+     <Link to={links.REGISTER}>{texts.REGISTER}</Link>
       </div>
     </div>
   )
