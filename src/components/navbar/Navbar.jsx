@@ -8,10 +8,11 @@ import Logout from "../logout/Logout";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import Menu from '../menu/Menu';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = ({setSearchValue}) => {
 
-
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const userStatus = useSelector(store => store.fireBase.userStatus);
 
@@ -20,9 +21,9 @@ const Navbar = ({setSearchValue}) => {
       <ul className="navbar-list">
         <li className="navbar-list-item"><Logo/></li>
         <li className="navbar-list-item"><SearchBar setSearchValue={setSearchValue}/></li>
-        <li className={`navbar-list-item home hide-opt ${location.pathname === links.HOME? "focus" : ""}`}><Link to={links.HOME}>{texts.HOME}</Link></li>
-        <li className={`navbar-list-item hide-opt ${location.pathname === links.EXPLORE? "focus" : ""}`}><Link to={links.EXPLORE}>{texts.EXPLORE}</Link></li>
-        {userStatus === 'logged' && <li className={`navbar-list-item hide-opt ${location.pathname === links.SAVED? "focus" : ""}`}><Link to={links.SAVED}>{texts.SAVED}</Link></li>}
+        <li className={`navbar-list-item home hide-opt ${location.pathname === links.HOME? "focus" : ""}`}><Link to={links.HOME}>{t('home')}</Link></li>
+        <li className={`navbar-list-item hide-opt ${location.pathname === links.EXPLORE? "focus" : ""}`}><Link to={links.EXPLORE}>{t('explore')}</Link></li>
+        {userStatus === 'logged' && <li className={`navbar-list-item hide-opt ${location.pathname === links.SAVED? "focus" : ""}`}><Link to={links.SAVED}>{t('saved')}</Link></li>}
         {userStatus === 'logged' && <Logout className='navbar-list-item logout hide-opt'/>}
         {userStatus !== 'logged' && <li className='navbar-list-item login hide-opt'><Link to={links.LOGIN}>{texts.LOGIN}</Link></li>}
         <li className="navbar-list-item user hide-opt"><UserImg/></li>

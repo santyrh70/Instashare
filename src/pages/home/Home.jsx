@@ -9,8 +9,10 @@ import Pagination from "../../components/pagination/Pagination";
 import Spinner from "../../components/spinner/Spinner";
 import { useSelector, useDispatch } from 'react-redux';
 import { getCurratedPhotos, getPhotosBySearchValue, setSearchValue } from '../../actions/actions';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const photos = useSelector(store => store.pexelsApi.photosPexels);
@@ -33,7 +35,7 @@ const Home = () => {
       dispatch(getPhotosBySearchValue(searchValue, imagesPerPage));
     }
   }, [searchValue, imagesPerPage]);
-  
+
   const handleSearchChange = (e) => {
     if (e.key === "Enter") {
       dispatch(setSearchValue(e.target.value));

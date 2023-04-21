@@ -1,0 +1,20 @@
+
+.footer {
+  bottom: 0;
+  left: 0;
+  position: relative;
+  right: 0;
+  .languages-container {
+		background: #323b40;
+		overflow: hidden;
+		padding-bottom: 4px;
+		text-align: center;
+    padding: 20px 0;
+    .language-bttn {
+      all: unset;
+      margin: 0 12px;
+      background-color: #323b40;
+      color: white;
+    }
+  }
+}

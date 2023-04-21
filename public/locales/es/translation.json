@@ -1,0 +1,16 @@
+{
+  "title": "Bienvenido a React usando react-i18next",
+  "home": "Inicio",
+  "explore": "Explorar",
+  "search": "Buscar",
+  "saved": "Guardados",
+  "dropdownPagination": "Imágenes por pagina",
+  "the": "de",
+  "spanish": "Español",
+  "english": "Ingles",
+  "german": "Aleman",
+  "description": {
+    "part1": "Para empezar, edita <1>src/App.js</1> y guarda para refrescar."
+  },
+  "example": "ejemplo"
+}

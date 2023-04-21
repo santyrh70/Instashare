@@ -1,6 +1,7 @@
 import './App.css';
+import React from 'react';
 import { links } from "./constants/links";
-import Home from '../src/pages/home/Home';
+import { Suspense } from 'react';
 import Explore from "../src/pages/explore/Explore";
 import Saved from "../src/pages/saved/Saved";
 import Register from "./pages/register/Register";
@@ -8,13 +9,13 @@ import SignIn from "./pages/signIn/SignIn";
 import ProtectedRoutes from './pages/ProtectedRoutes';
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
-  useParams,
+  RouterProvider
 } from "react-router-dom";
 
-
 import { ContextProvider } from "./utils/context";
+import Container from './components/reactPortalFooter/Container';
+
+const Home = React.lazy(() => import('../src/pages/home/Home'))
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,11 @@ function App() {
   return (
     <div className="App">
       <ContextProvider>
-        <RouterProvider router={router} />
+        <Suspense fallback={<div style={{color: 'red', fontSize: "240px"}}>{`Loading ${console.log("Suspense")}`}</div>} >
+          <RouterProvider router={router}/>
+        </Suspense>
       </ContextProvider>
+      <Container/>
     </div>
   );
 }

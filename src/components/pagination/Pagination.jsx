@@ -1,10 +1,12 @@
 import './pagination.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurratedPhotos } from "../../actions/actions";
+import { useTranslation } from 'react-i18next';
 
 
 const Pagintation = () => {
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
   const imagesPerPage = useSelector(store => store.pexelsApi.imagesPerPage);
   const currentPage = useSelector(store => store.pexelsApi.currentPage);
   const nextPageUrl = useSelector(store => store.pexelsApi.nextUrl);
@@ -17,7 +19,7 @@ const Pagintation = () => {
     <div className='pagination-container'>
       <div className='pagination'>
         <button className='pagination__prev-bttn' onClick={() => dispatch(getCurratedPhotos(prevPageUrl, imagesPerPage))} disabled={!prevPageUrl} > {'<<'} </button>
-        <span className='pagination__current-page'> <span className='focus'>{currentPage}</span> de {totalPages}</span>
+        <span className='pagination__current-page'> <span className='focus'>{currentPage}</span> {t('the')} {totalPages}</span>
         <button className='pagination__next-bttn' onClick={() => dispatch(getCurratedPhotos(nextPageUrl, imagesPerPage))} disabled={!nextPageUrl} > {'>>'} </button>
       </div>
     </div>

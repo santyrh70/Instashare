@@ -1,0 +1,16 @@
+{
+  "title": "Welcome to react using react-i18next",
+  "home": "Start",
+  "explore": "Erkunden Sie",
+  "search": "Suche",
+  "saved": "Gerettet",
+  "dropdownPagination": "Bilder pro Seite",
+  "the": "von",
+  "spanish": "Spanisch",
+  "english": "Englisch",
+  "german": "Deutsch",
+  "description": {
+    "part1": "To get started, edit <1>src/App.js</1> and save to reload."
+  },
+  "example": "esadja"
+}
