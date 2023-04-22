@@ -55,9 +55,16 @@ export const logIn = (email, password) => (dispatch) => {
       })
     })
     .catch((error) => {
+      dispatch({
+        type: types.LOGGING_IN_ERROR,
+        isLoggingIn: false,
+        errorCode: error.code,
+        errorMssg: error.message,
+      })
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorMessage, errorCode)
+      console.log(errorCode)
+   
     });
 }
 

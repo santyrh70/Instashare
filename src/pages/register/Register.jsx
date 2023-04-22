@@ -5,10 +5,11 @@ import { registerNewUser } from '../../actions/actions';
 import Logo from '../../components/logo/Logo';
 import { links } from '../../constants/links';
 import { texts } from '../../constants/texts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const errorCode = useSelector(store => store.fireBase.errorCode);
   const errorMssg = useSelector(store => store.fireBase.errorMssg);
    
@@ -19,10 +20,9 @@ const Register = () => {
       <Formik
        initialValues={{ email: '', password: '', rePassword: '' }}
        onSubmit={(values, { setSubmitting }) => {
-         setTimeout(() => {
            dispatch(registerNewUser(values.email, values.password))
            setSubmitting(false);
-         }, 400);
+           navigate('/')
        }}
       >
        {({

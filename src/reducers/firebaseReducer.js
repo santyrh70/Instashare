@@ -24,6 +24,13 @@ const firebaseReducer = (state = initialState, action) => {
         currentUser: action.currentUser,
         userStatus: action.userStatus,
       }
+    case types.LOGGING_IN_ERROR:
+      return {
+        ...state,
+        isLoggingIn: action.isLoggingIn,
+        errorCode: action.errorCode,
+        errorMssg: action.errorMssg,
+      }
     case types.REGISTERING_NEW_USER:
       return {
         ...state,
